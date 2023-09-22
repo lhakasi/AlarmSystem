@@ -1,15 +1,17 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed;
 
-    private Rigidbody2D rb2d;
+    private Rigidbody2D _rigidbody2D;
     private Animator _animator;    
 
-    void Start()
+    private void Start()
     {
-        rb2d = GetComponent<Rigidbody2D>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
     }
 
@@ -17,7 +19,7 @@ public class Player : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
 
-        rb2d.velocity = new Vector2(horizontalInput * _speed, rb2d.velocity.y);
+        _rigidbody2D.velocity = new Vector2(horizontalInput * _speed, _rigidbody2D.velocity.y);
 
         bool flipped = horizontalInput < 0;
 

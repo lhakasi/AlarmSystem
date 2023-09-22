@@ -1,18 +1,23 @@
+using System.Collections;
 using UnityEngine;
 
-public class Alarm : MonoBehaviour
+[RequireComponent(typeof(AudioSource))]
+public class AlarmSystem : MonoBehaviour
 {
     [SerializeField] private float _targetVolume;
     [SerializeField] private float _duration;
+
     private float _startVolume = 0;
     private float _runningTime;
 
     private AudioSource _melody;
+
     private bool _isFadingOut;
 
-    void Start()
+    private void Start()
     {
         _melody = GetComponent<AudioSource>();
+        _melody.volume = _startVolume;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -20,10 +25,11 @@ public class Alarm : MonoBehaviour
         if (collision.TryGetComponent<Player>(out Player player))
         {
             _runningTime = 0;
-            _melody.volume = _startVolume;
-            _melody.Play();
+            _startVolume = _melody.volume;
 
             _isFadingOut = false;
+
+            StartCoroutine(FadeAudio());
         }
     }
 
@@ -35,24 +41,32 @@ public class Alarm : MonoBehaviour
             _startVolume = _melody.volume;
 
             _isFadingOut = true;
+
+            if (!_melody.isPlaying)
+                StopCoroutine(FadeAudio());
         }
     }
 
-    void Update()
-    {        
-        if (_runningTime <= _duration)
+    private IEnumerator FadeAudio()
+    {
+        while (_runningTime <= _duration)
         {
             _runningTime += Time.deltaTime;
 
             float normalizeRunningTime = _runningTime / _duration;
 
-            _melody.volume = Mathf.Lerp(_startVolume, _runningTime, normalizeRunningTime);
+            if (!_melody.isPlaying)
+                _melody.Play();
 
-            if( _isFadingOut )            
-                _melody.volume = Mathf.Lerp(_startVolume, 0, normalizeRunningTime);          
+            _melody.volume = Mathf.Lerp(_startVolume, _targetVolume, normalizeRunningTime);
+
+            if (_isFadingOut)
+                _melody.volume = Mathf.Lerp(_startVolume, 0, normalizeRunningTime);
 
             if (_melody.volume == 0)
                 _melody.Stop();
+
+            yield return null;
         }
     }
 }
