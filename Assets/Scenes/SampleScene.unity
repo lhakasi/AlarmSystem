@@ -3045,6 +3045,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7311484154864826557, guid: 429a853bde915694794b0c31340c4a85, type: 3}
   m_PrefabInstance: {fileID: 7311484155085181732}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &920031804 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 416635814206902900, guid: 429a853bde915694794b0c31340c4a85, type: 3}
+  m_PrefabInstance: {fileID: 7311484155085181732}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e76652f8c75a3448edbd5a72bdfb38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &973291729
 GameObject:
   m_ObjectHideFlags: 0
@@ -3851,8 +3862,16 @@ PrefabInstance:
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1786320983338576924, guid: 429a853bde915694794b0c31340c4a85, type: 3}
+      propertyPath: _alarmTrigger
+      value: 
+      objectReference: {fileID: 920031804}
+    - target: {fileID: 1786320983338576924, guid: 429a853bde915694794b0c31340c4a85, type: 3}
       propertyPath: _interpolationValue
       value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6650976844042906748, guid: 429a853bde915694794b0c31340c4a85, type: 3}
+      propertyPath: m_Name
+      value: Alarm
       objectReference: {fileID: 0}
     - target: {fileID: 7311484154864826556, guid: 429a853bde915694794b0c31340c4a85, type: 3}
       propertyPath: m_Name

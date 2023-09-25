@@ -2,22 +2,36 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class AlarmAudioChanger : MonoBehaviour
+public class Alarm : MonoBehaviour
 {
     [SerializeField] private float _maxVolume;
     [SerializeField] private float _minVolume;
     [SerializeField] private float _interpolationValue;
     [SerializeField] private float _delay;
+    
+    [SerializeField] private AlarmTrigger _alarmTrigger;
 
     private float _startVolume = 0;
 
     private Coroutine _fading;
     private AudioSource _melody;
 
+    private void OnEnable()
+    {
+        _alarmTrigger.OnTriggerEnter += Play;
+        _alarmTrigger.OnTriggerExit += Stop;
+    }    
+
     private void Start()
     {
         _melody = GetComponent<AudioSource>();
         _melody.volume = _startVolume;
+    }
+
+    private void OnDisable()
+    {
+        _alarmTrigger.OnTriggerEnter -= Play;
+        _alarmTrigger.OnTriggerExit -= Stop;
     }
 
     public void Play() => 

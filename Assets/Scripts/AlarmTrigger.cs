@@ -1,18 +1,20 @@
+using System;
 using UnityEngine;
 
 public class AlarmTrigger : MonoBehaviour
 {
-    [SerializeField] private AlarmAudioChanger _audioChanger;
-    
+    public event Action OnTriggerEnter;
+    public event Action OnTriggerExit;
+        
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent<Player>(out Player player))
-            _audioChanger.Play();            
+            OnTriggerEnter.Invoke();            
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.TryGetComponent<Player>(out Player player))
-            _audioChanger.Stop();            
+            OnTriggerExit.Invoke();            
     }
 }
