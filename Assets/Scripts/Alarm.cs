@@ -18,8 +18,8 @@ public class Alarm : MonoBehaviour
 
     private void OnEnable()
     {
-        _alarmTrigger.OnTriggerEnter += Play;
-        _alarmTrigger.OnTriggerExit += Stop;
+        _alarmTrigger.OnTriggerEnter += OnPlay;
+        _alarmTrigger.OnTriggerExit += OnStop;
     }    
 
     private void Start()
@@ -30,14 +30,14 @@ public class Alarm : MonoBehaviour
 
     private void OnDisable()
     {
-        _alarmTrigger.OnTriggerEnter -= Play;
-        _alarmTrigger.OnTriggerExit -= Stop;
+        _alarmTrigger.OnTriggerEnter -= OnPlay;
+        _alarmTrigger.OnTriggerExit -= OnStop;
     }
 
-    public void Play() => 
+    public void OnPlay() => 
         Restart(_maxVolume);    
     
-    public void Stop() => 
+    public void OnStop() => 
         Restart(_minVolume);    
 
     private void Restart(float targetVolume)
