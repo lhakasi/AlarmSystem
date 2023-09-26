@@ -9,10 +9,8 @@ public class PlayerMovement : MonoBehaviour
 
     public float HorizontalInput { get; private set; }
 
-    private void Start()
-    {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-    }
+    private void Start() =>    
+        _rigidbody2D = GetComponent<Rigidbody2D>();    
 
     private void Update()
     {
@@ -21,8 +19,6 @@ public class PlayerMovement : MonoBehaviour
         Move();
     }
 
-    private void Move()
-    {
-        _rigidbody2D.velocity = new Vector2(HorizontalInput * _speed, _rigidbody2D.velocity.y);        
-    }    
+    private void Move() =>    
+        _rigidbody2D.velocity = new Vector2(HorizontalInput * _speed, _rigidbody2D.velocity.y); 
 }

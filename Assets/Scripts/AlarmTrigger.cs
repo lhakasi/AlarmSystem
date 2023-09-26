@@ -3,18 +3,18 @@ using UnityEngine;
 
 public class AlarmTrigger : MonoBehaviour
 {
-    public event Action OnTriggerEnter;
-    public event Action OnTriggerExit;
+    public event Action PlayerEntered;
+    public event Action PlayerExited;
         
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent<Player>(out Player player))
-            OnTriggerEnter.Invoke();            
+            PlayerEntered.Invoke();            
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.TryGetComponent<Player>(out Player player))
-            OnTriggerExit.Invoke();            
+            PlayerExited.Invoke();            
     }
 }
